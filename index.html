@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hangman</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<body>
+<!-- Ask user to begin by clicking anykey,
+Have a word bank of possible words,
+display word as "_" "_" for each letter,
+establish number of allowable missed letters,
+check to see if user selects a valid letter (a-z & only 1 per time),
+compare if user guessed letter vs word letter,
+if guessed letter is in the word then display letter and play hit sound,
+if guessed letter is not in the word then credit user with misstake and play strike sound,
+if user gusses word within allowable number of missed guesses notate win for user and sound cheers sound bite,
+if user does not gusses word within allowable number of missed guesses notate loss for user and sound "out of of here" sound bite,
+after win/loss move on to next word. -->
+<div>
+  <h1>Baseball Word Guess</h1>
+  <p id="directions-text">Press any key to start playing!</p>
+  <p id="word-text"></p>
+  <p id="guessesLeft">Guesses Left:</p>
+  <p id="userchoice-text"></p>
+  <p id="wins-text">Wins:</p>
+  <p id="losses-text">Loses:</p>
+</div>
+
+<script type="text/javascript">
+
+  var WordBank=["Assist", "Balk", "Ball", "Complete Game", "Double", "Double Play", "Error", "Flyball", "Grand Slam", "Groundout", "Hit", "Home Run", "Line Drive", "Loss", "Out", "Runs Batted In", "Save", "Single", "Strikeout", "Triple", "Triple Play", "Walk", "Walk Off", "Win"];
+
+  var Wins = 0;
+  var Losess = 0;
+  var GuessesLeft = 0;
+
+  var directionsText = document.getElementById("directions-text");
+  var userChoiceText = document.getElementById("userchoice-text");
+  var winsText = document.getElementById("wins-text");
+  var lossesText = document.getElementById("losses-text");
+
+  document.onkeyup = function(event) {
+    var userGuess = event.key;
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    
+
+
+    directionsText.textContent = "";
+    userChoiceText.textContent = "You chose: " + userGuess;
+    winsText.textContent = "wins: " + wins;
+    lossesText.textContent = "losses: " + losses;
+  };
+</script>
+  
+</body>
+</html>
