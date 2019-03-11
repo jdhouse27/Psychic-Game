@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Hangman</title>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="assets/javascript/game.js"></script>
+
 
 </head>
 <body>
@@ -19,41 +22,42 @@ if guessed letter is not in the word then credit user with misstake and play str
 if user gusses word within allowable number of missed guesses notate win for user and sound cheers sound bite,
 if user does not gusses word within allowable number of missed guesses notate loss for user and sound "out of of here" sound bite,
 after win/loss move on to next word. -->
+
 <div>
   <h1>Baseball Word Guess</h1>
-  <p id="directions-text">Press any key to start playing!</p>
-  <p id="word-text"></p>
-  <p id="guessesLeft">Guesses Left:</p>
-  <p id="userchoice-text"></p>
-  <p id="wins-text">Wins:</p>
-  <p id="losses-text">Loses:</p>
+
+  <div class="container">
+    <main class="row">
+      <div class="col-md-3">
+        <div class="card">
+          <ul class="list-group">
+            <li id="guessesLeft">Guesses Left:</li>
+            <li id="gameWins">Wins:</li>
+            <li id="gameLosses">Losses:</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="jumbotron" style="background-color: blanchedalmond">
+          <p class="game-instruct">Select any letter between a-z one at a time to guess the letters that make up the word.  Correctly guessed letters
+            will unhide the letter and you will hear the sound of a hit.  Incorrect guesses will result in loss of a guess as well as you will hear a "strike"
+            sound.  Using up all your avialable guesses before you uncover the word will result in a game loss and you will hear the "You're Out".  Uncovering
+            all the letters before getting out will result in you winning the round and you will hear the crowd roar.  Good luck and have fun.
+          </p>
+          <br>
+          <div id="directions-text">
+              <p>Press any key to start playing!</p>
+          </div>
+          <p id="gameWord"></p>
+          <p id="userGuess"></p>
+        </div>
+      </div>
+    </main>
+  </div>
 </div>
 
-<script type="text/javascript">
-
-  var WordBank=["Assist", "Balk", "Ball", "Complete Game", "Double", "Double Play", "Error", "Flyball", "Grand Slam", "Groundout", "Hit", "Home Run", "Line Drive", "Loss", "Out", "Runs Batted In", "Save", "Single", "Strikeout", "Triple", "Triple Play", "Walk", "Walk Off", "Win"];
-
-  var Wins = 0;
-  var Losess = 0;
-  var GuessesLeft = 0;
-
-  var directionsText = document.getElementById("directions-text");
-  var userChoiceText = document.getElementById("userchoice-text");
-  var winsText = document.getElementById("wins-text");
-  var lossesText = document.getElementById("losses-text");
-
-  document.onkeyup = function(event) {
-    var userGuess = event.key;
-    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    
 
 
-    directionsText.textContent = "";
-    userChoiceText.textContent = "You chose: " + userGuess;
-    winsText.textContent = "wins: " + wins;
-    lossesText.textContent = "losses: " + losses;
-  };
-</script>
   
 </body>
 </html>
