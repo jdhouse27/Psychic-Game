@@ -79,6 +79,7 @@ function evaluateGuess(letter) {
     }
 
 // Checks for win
+function checkWin(){
     if(gameWord[positions[i]] === -1) {
         gameStatus.innerHTML = "Great! You Win!";
         wins++;
