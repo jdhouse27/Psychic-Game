@@ -7,48 +7,42 @@ var wrongGuessSound = new Audio('./assets/images/strike.wav');
 var winSound = new Audio('./assets/images/cheer.wav');
 var loseSound = new Audio('./assets/images/Out.wav');
 
-const maxTries = 10;            // Maximum number of tries player has
+const maxTries = 6;            // Maximum number of tries player has
 
-var guessedLetters = [];        // Stores the letters the user guessed
+var guessedLetters = [];        
 var currentWord;                // Index of the current word in the array
-var remainingGuesses = 0;       // How many tries the player has left
+var remainingGuesses = 0;       
 var hasFinished = false;        // Flag for 'press any key to try again'     
-var wins = 0; 
-var losses = 0;                  // How many wins has the player racked up
+var wins = 0;                   // How many wins has the player racked up
+var losses = 0;                  
 
-// Reset our game-level variables
+// Reset
 function resetGame() {
     remainingGuesses = maxTries;
 
-    // Use Math.floor to round the random number down to the nearest whole.
     currentWord = Math.floor(Math.random() * (wordBank.length));
 
-    // Clear out arrays
     guessedLetters = [];
     gameWord = [];
 
-    // Build the guessing word and clear it out
+    // Build the game word
     for (var i = 0; i < currentWord.length; i++) {
         gameWord.push("_");
     }   
 
-    // Hide game over and win images/text
+    // Hide Press any key to star playing text
     directionsText.textContent = "";
-        
-    // Show display
+
     updateDisplay();
 };
 
-//  Updates the display on the HTML Page
 function updateDisplay() {
 
     document.getElementById("gameWins").innerText = wins;
 
-    // Display how much of the word we've already guessed on screen.
-    // Printing the array would add commas (,) - so we concatenate a string from each value in the array.
-    var guessingWordText = "_";
+    var gameWordText = "_";
     for (var i = 0; i < gameWord.length; i++) {
-        guessingWordText += gameWord[i];
+        gameWordText += gameWord[i];
         if (currentWord[i] === " "){
             gameWord.push(" ");
          space = 1;   
@@ -57,27 +51,22 @@ function updateDisplay() {
         }
     }
 
-    //
-    document.getElementById("gameWord").innerText = guessingWordText;
+    document.getElementById("gameWord").innerText = gameWordText;
     document.getElementById("guessesLeft").innerText = remainingGuesses;
     document.getElementById("userGuess").innerText = guessedLetters;
 };
 
-
-// This function takes a letter and finds all instances of 
-// appearance in the string and replaces them in the guess word.
 function evaluateGuess(letter) {
-    // Array to store positions of letters in string
+    
     var positions = [];
 
-    // Loop through word finding all instances of guessed letter, store the indicies in an array.
     for (var i = 0; i < wordBank[currentWord].length; i++) {
         if(wordBank[currentWord][i] === letter) {
             positions.push(i);
         }
     }
 
-    // if there are no indicies, remove a guess
+    // if there are no indicies, remove a guess & play sound
     if (positions.length <= 0) {
         remainingGuesses--;
         wrongGuessSound.play();
@@ -89,8 +78,7 @@ function evaluateGuess(letter) {
         }
     }
 
-// Checks for a win by seeing if there are any remaining underscores in the guessingword we are building.
-function checkWin() {
+// Checks for win
     if(gameWord[positions[i]] === -1) {
         gameStatus.innerHTML = "Great! You Win!";
         wins++;
@@ -113,7 +101,7 @@ function checkLoss()
 // Makes a guess
 function makeGuess(letter) {
     if (remainingGuesses > 0) {
-        // Make sure we didn't use this letter yet
+        
         if (guessedLetters.indexOf(letter) === -1) {
             guessedLetters.push(letter);
             evaluateGuess(letter);
@@ -124,12 +112,12 @@ function makeGuess(letter) {
 
 
 document.onkeydown = function(event) {
-    // If we finished a game, dump one keystroke and reset.
+   
     if(hasFinished) {
         resetGame();
         hasFinished = false;
     } else {
-        // Check to make sure a-z was pressed.
+     
         if(event.keyCode >= 65 && event.keyCode <= 90) {
             updateDisplay();
             checkWin();
