@@ -12,9 +12,12 @@ const maxTries = 6;            // Maximum number of tries player has
 var guessedLetters = [];        
 var currentWord;                // Index of the current word in the array
 var remainingGuesses = 0;       
-var hasFinished = false;        // Flag for 'press any key to try again'     
+//var hasFinished = false;        // Flag for 'press any key to try again'     
 var wins = 0;                   // How many wins has the player racked up
 var losses = 0;                  
+var positions;
+var gameWord;
+
 
 // Reset
 function resetGame() {
@@ -31,16 +34,16 @@ function resetGame() {
     }   
 
     // Hide Press any key to star playing text
-    directionsText.textContent = "";
+    //directionsText.textContent = "";
 
     updateDisplay();
 };
 
 function updateDisplay() {
+console.log(gameWord);
+    //document.getElementById("gameWins").innerText = wins;
 
-    document.getElementById("gameWins").innerText = wins;
-
-    var gameWordText = "_";
+     gameWordText = "_";
     for (var i = 0; i < gameWord.length; i++) {
         gameWordText += gameWord[i];
         if (currentWord[i] === " "){
@@ -51,14 +54,15 @@ function updateDisplay() {
         }
     }
 
-    document.getElementById("gameWord").innerText = gameWordText;
-    document.getElementById("guessesLeft").innerText = remainingGuesses;
-    document.getElementById("userGuess").innerText = guessedLetters;
+    //document.getElementById("gameWord").innerHTML = gameWordText;
+    //document.getElementById("guessesLeft").innerText = remainingGuesses;
+    //document.getElementById("userGuess").innerText = guessedLetters;
+    //document.getElementById("directions-text").innerText = "";
 };
 
 function evaluateGuess(letter) {
     
-    var positions = [];
+    positions = [];
 
     for (var i = 0; i < wordBank[currentWord].length; i++) {
         if(wordBank[currentWord][i] === letter) {
@@ -77,14 +81,15 @@ function evaluateGuess(letter) {
             rightGuessSound.play();
         }
     }
+};
 
 // Checks for win
 function checkWin(){
-    if(gameWord[positions[i]] === -1) {
+    if(gameWord[positions[i]] <0) {
         gameStatus.innerHTML = "Great! You Win!";
         wins++;
         winSound.play();
-        hasFinished = true;
+        //hasFinished = true;
     }
 };
 
@@ -95,7 +100,7 @@ function checkLoss()
     if(remainingGuesses <= 0) {
         loseSound.play();
         gameStatus.innerHTML = "Game Over! You Lose!";
-        hasFinished = true;
+        //hasFinished = true;
     }
 }
 
@@ -111,13 +116,9 @@ function makeGuess(letter) {
     
 };
 
+resetGame();
 
 document.onkeydown = function(event) {
-   
-    if(hasFinished) {
-        resetGame();
-        hasFinished = false;
-    } else {
      
         if(event.keyCode >= 65 && event.keyCode <= 90) {
             updateDisplay();
@@ -125,6 +126,6 @@ document.onkeydown = function(event) {
             checkLoss();
             makeGuess();
         }
-    }
+    
   };
-};
+  
