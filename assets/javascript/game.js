@@ -54,10 +54,10 @@ console.log(gameWord);
         }
     }
 
-    //document.getElementById("gameWord").innerHTML = gameWordText;
-    //document.getElementById("guessesLeft").innerText = remainingGuesses;
-    //document.getElementById("userGuess").innerText = guessedLetters;
-    //document.getElementById("directions-text").innerText = "";
+    document.getElementById("gameWord").innerHTML = gameWordText;
+    document.getElementById("guessesLeft").innerText = remainingGuesses;
+    document.getElementById("userGuess").innerText = guessedLetters;
+    document.getElementById("directions-text").innerText = "";
 };
 
 function evaluateGuess(letter) {
